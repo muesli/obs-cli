@@ -8,8 +8,21 @@ OBS-cli is a command-line remote control for OBS. It requires the
 
 ## Installation
 
-Make sure you have a working Go environment (Go 1.11 or higher is required).
-See the [install instructions](http://golang.org/doc/install.html).
+### Packages & Binaries
+
+On Arch Linux you can simply install the package from the AUR:
+
+    yay -S obs-cli
+
+Or download a binary from the [releases](https://github.com/muesli/obs-cli/releases)
+page. Linux (including ARM) binaries are available, as well as Debian and RPM
+packages.
+
+### Build From Source
+
+Alternatively you can also build `obs-cli` from source. Make sure you have a
+working Go environment (Go 1.11 or higher is required). See the
+[install instructions](http://golang.org/doc/install.html).
 
 To install obs-cli, simply run:
 
