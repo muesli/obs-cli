@@ -17,12 +17,6 @@ To install obs-cli, simply run:
 
 ## Usage
 
-List special sources:
-
-```bash
-obs-cli list-sources
-```
-
 Start streaming:
 
 ```bash
@@ -47,12 +41,6 @@ Change a FreeType text label:
 obs-cli change-text <label> <text>
 ```
 
-Toggle mute status of a source:
-
-```bash
-obs-cli toggle-mute <source>
-```
-
 List all items of a scene:
 
 ```bash
@@ -69,4 +57,16 @@ Hide a scene-item:
 
 ```bash
 obs-cli hide-sceneitem <scene> <item>
+```
+
+List special sources:
+
+```bash
+obs-cli list-sources
+```
+
+Toggle mute status of a source:
+
+```bash
+obs-cli toggle-mute <source>
 ```
