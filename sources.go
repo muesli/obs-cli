@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	obsws "github.com/christopher-dG/go-obs-websocket"
+	obsws "github.com/muesli/go-obs-websocket"
 	"github.com/spf13/cobra"
 )
 
