@@ -39,7 +39,8 @@ func listSources() error {
 			return err
 		}
 
-		fmt.Println("Special Sources\n===============\n")
+		fmt.Println("Special Sources")
+		fmt.Println("===============")
 		fmt.Printf("Desktop1: %s\n", resp.Desktop1)
 		fmt.Printf("Desktop2: %s\n", resp.Desktop2)
 		fmt.Printf("Mic1: %s\n", resp.Mic1)
