@@ -1,0 +1,90 @@
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+  - go mod download
+builds:
+  -
+    id: "obs-cli"
+    binary: obs-cli
+    ldflags: -s -w -X main.Version={{ .Version }} -X main.CommitSHA={{ .Commit }}
+    goos:
+      - linux
+      - freebsd
+      - windows
+    goarch:
+      - amd64
+      - arm64
+      - 386
+      - arm
+    goarm:
+      - 6
+      - 7
+  -
+    id: "darwin"
+    binary: "obs-cli"
+    ldflags: -s -w -X main.Version={{ .Version }} -X main.CommitSHA={{ .Commit }}
+    goos:
+      - darwin
+    goarch:
+      - amd64
+
+archives:
+  - id: default
+    builds:
+      - obs-cli
+    format_overrides:
+      - goos: windows
+        format: zip
+    replacements:
+      windows: Windows
+      386: i386
+      amd64: x86_64
+  - id: darwin
+    builds:
+      - darwin
+    replacements:
+      darwin: Darwin
+      amd64: x86_64
+
+nfpms:
+  -
+    builds:
+    - obs-cli
+
+    vendor: muesli
+    homepage: "https://fribbledom.com/"
+    maintainer: "Christian Muehlhaeuser <muesli@gmail.com>"
+    description: ""
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
+
+brews:
+  - ids:
+    - darwin
+    github:
+      owner: muesli
+      name: homebrew-tap
+    commit_author:
+      name: "Christian Muehlhaeuser"
+      email: "muesli@gmail.com"
+    homepage: "https://fribbledom.com/"
+    description: ""
+    # skip_upload: true
+
+signs:
+  - artifacts: checksum
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
