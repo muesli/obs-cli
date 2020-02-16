@@ -55,7 +55,7 @@ nfpms:
     vendor: muesli
     homepage: "https://fribbledom.com/"
     maintainer: "Christian Muehlhaeuser <muesli@gmail.com>"
-    description: ""
+    description: "OBS-cli is a command-line remote control for OBS"
     license: MIT
     formats:
       - deb
@@ -72,7 +72,7 @@ brews:
       name: "Christian Muehlhaeuser"
       email: "muesli@gmail.com"
     homepage: "https://fribbledom.com/"
-    description: ""
+    description: "OBS-cli is a command-line remote control for OBS"
     # skip_upload: true
 
 signs:
