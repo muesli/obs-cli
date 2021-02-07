@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	obsws "github.com/muesli/go-obs-websocket"
+	obsws "github.com/christopher-dG/go-obs-websocket"
 	"github.com/spf13/cobra"
 )
 
@@ -62,13 +62,12 @@ func listSceneItems(scene string) error {
 	}
 
 	for _, v := range resp.Scenes {
-		if v["name"] != scene {
+		if v.Name != scene {
 			continue
 		}
 
-		for _, s := range v["sources"].([]interface{}) {
-			src := s.(map[string]interface{})
-			fmt.Println(src["name"])
+		for _, s := range v.Sources {
+			fmt.Println(s.Name)
 		}
 	}
 
@@ -97,6 +96,7 @@ func setSceneItemVisible(visible bool, scene string, items ...string) error {
 			resp.CropLeft,
 			resp.CropRight,
 			visible,
+			false,
 			resp.BoundsType,
 			resp.BoundsAlignment,
 			resp.BoundsX,

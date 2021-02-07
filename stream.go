@@ -1,7 +1,7 @@
 package main
 
 import (
-	obsws "github.com/muesli/go-obs-websocket"
+	obsws "github.com/christopher-dG/go-obs-websocket"
 	"github.com/spf13/cobra"
 )
 
