@@ -42,6 +42,24 @@ Stop streaming:
 obs-cli stop-stream
 ```
 
+Start recording:
+
+```bash
+obs-cli start-recording
+```
+
+Stop recording:
+
+```bash
+obs-cli stop-recording
+```
+
+Toggle recording:
+
+```bash
+obs-cli toggle-recording
+```
+
 Switch to a scene:
 
 ```bash
