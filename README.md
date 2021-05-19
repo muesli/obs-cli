@@ -1,7 +1,7 @@
 # obs-cli
 
 [![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://godoc.org/github.com/muesli/obs-cli)
-[![Go ReportCard](http://goreportcard.com/badge/muesli/obs-cli)](http://goreportcard.com/report/muesli/obs-cli)
+[![Go ReportCard](https://goreportcard.com/badge/muesli/obs-cli)](https://goreportcard.com/report/muesli/obs-cli)
 
 OBS-cli is a command-line remote control for OBS. It requires the
 [obs-websocket](https://github.com/Palakis/obs-websocket) plugin to be installed on your system.
@@ -22,7 +22,7 @@ packages.
 
 Alternatively you can also build `obs-cli` from source. Make sure you have a
 working Go environment (Go 1.11 or higher is required). See the
-[install instructions](http://golang.org/doc/install.html).
+[install instructions](https://golang.org/doc/install.html).
 
 To install obs-cli, simply run:
 
