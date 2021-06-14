@@ -1,7 +1,6 @@
 package main
 
 import (
-	obsws "github.com/muesli/go-obs-websocket"
 	"github.com/spf13/cobra"
 )
 
@@ -24,17 +23,26 @@ var (
 )
 
 func startStream() error {
-	m := make(map[string]interface{})
-	req := obsws.NewStartStreamingRequest(m, "", m, m, "", "", true, "", "")
-	return req.Send(*client)
+	/*
+		resp, err := client.Streaming.GetStreamSettings()
+		if err != nil {
+			return err
+		}
+
+		r := streaming.StartStreamingParams{}
+		r.Stream.Settings = resp.Settings
+	*/
+
+	_, err := client.Streaming.StartStreaming(nil)
+	return err
 }
 
 func stopStream() error {
-	req := obsws.NewStopStreamingRequest()
-	return req.Send(*client)
+	_, err := client.Streaming.StopStreaming()
+	return err
 }
 
 func init() {
-	// rootCmd.AddCommand(startStreamCmd)
+	rootCmd.AddCommand(startStreamCmd)
 	rootCmd.AddCommand(stopStreamCmd)
 }

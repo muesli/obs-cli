@@ -2,12 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
 	"os"
-	"time"
 
-	obsws "github.com/muesli/go-obs-websocket"
+	"github.com/andreykaipov/goobs"
 	"github.com/spf13/cobra"
 )
 
@@ -20,7 +17,7 @@ var (
 		Short: "obs-cli is a command-line remote control for OBS",
 	}
 
-	client *obsws.Client
+	client *goobs.Client
 )
 
 func main() {
@@ -30,7 +27,7 @@ func main() {
 	}
 
 	if client != nil {
-		client.Disconnect()
+		_ = client.Disconnect()
 	}
 }
 
@@ -41,15 +38,10 @@ func init() {
 }
 
 func connectOBS() {
-	// disable obsws logging
-	obsws.Logger = log.New(ioutil.Discard, "", log.LstdFlags)
-
-	client = &obsws.Client{Host: host, Port: int(port)}
-	if err := client.Connect(); err != nil {
-		fmt.Println(err)
+	var err error
+	client, err = goobs.New(host + fmt.Sprintf(":%d", port))
+	if err != nil {
+		fmt.Println("error:", err)
 		os.Exit(1)
 	}
-
-	// Set the amount of time we can wait for a response.
-	obsws.SetReceiveTimeout(time.Second * 2)
 }

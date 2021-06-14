@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 
-	obsws "github.com/muesli/go-obs-websocket"
 	"github.com/spf13/cobra"
 )
 
@@ -33,8 +32,7 @@ func listSources() error {
 	*/
 
 	{
-		req := obsws.NewGetSpecialSourcesRequest()
-		resp, err := req.SendReceive(*client)
+		resp, err := client.Sources.GetSpecialSources()
 		if err != nil {
 			return err
 		}
