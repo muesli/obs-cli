@@ -1,16 +1,19 @@
 env:
   - GO111MODULE=on
+  - CGO_ENABLED=0
 before:
   hooks:
-  - go mod download
+    - go mod tidy
 builds:
-  -
-    id: "obs-cli"
-    binary: obs-cli
+  - binary: obs-cli
+    flags:
+      - -trimpath
     ldflags: -s -w -X main.Version={{ .Version }} -X main.CommitSHA={{ .Commit }}
     goos:
       - linux
       - freebsd
+      - openbsd
+      - darwin
       - windows
     goarch:
       - amd64
@@ -20,52 +23,33 @@ builds:
     goarm:
       - 6
       - 7
-  -
-    id: "darwin"
-    binary: "obs-cli"
-    ldflags: -s -w -X main.Version={{ .Version }} -X main.CommitSHA={{ .Commit }}
-    goos:
-      - darwin
-    goarch:
-      - amd64
 
 archives:
-  - id: default
-    builds:
-      - obs-cli
-    format_overrides:
+  - format_overrides:
       - goos: windows
         format: zip
     replacements:
       windows: Windows
-      386: i386
-      amd64: x86_64
-  - id: darwin
-    builds:
-      - darwin
-    replacements:
       darwin: Darwin
+      386: i386
       amd64: x86_64
 
 nfpms:
-  -
-    builds:
-    - obs-cli
-
+  - builds:
+      - obs-cli
     vendor: muesli
     homepage: "https://fribbledom.com/"
     maintainer: "Christian Muehlhaeuser <muesli@gmail.com>"
     description: "OBS-cli is a command-line remote control for OBS"
     license: MIT
     formats:
+      - apk
       - deb
       - rpm
     bindir: /usr/bin
 
 brews:
-  - ids:
-    - darwin
-    github:
+  - tap:
       owner: muesli
       name: homebrew-tap
     commit_author:
@@ -79,12 +63,12 @@ signs:
   - artifacts: checksum
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
   name_template: "{{ .Tag }}-next"
 changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+      - "^docs:"
+      - "^test:"
