@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	sceneitems "github.com/andreykaipov/goobs/api/requests/scene_items"
+	"github.com/andreykaipov/goobs/api/typedefs"
 	"github.com/spf13/cobra"
 )
 
@@ -61,13 +62,12 @@ func listSceneItems(scene string) error {
 	}
 
 	for _, v := range resp.Scenes {
-		if v["name"] != scene {
+		if v.Name != scene {
 			continue
 		}
 
-		for _, s := range v["sources"].([]interface{}) {
-			src := s.(map[string]interface{})
-			fmt.Println(src["name"])
+		for _, s := range v.Sources {
+			fmt.Println(s.Name)
 		}
 	}
 
@@ -77,7 +77,7 @@ func listSceneItems(scene string) error {
 func setSceneItemVisible(visible bool, scene string, items ...string) error {
 	for _, item := range items {
 		p := sceneitems.GetSceneItemPropertiesParams{
-			Item:      item,
+			Item:      &typedefs.Item{Name: item},
 			SceneName: scene,
 		}
 		resp, err := client.SceneItems.GetSceneItemProperties(&p)
@@ -87,7 +87,7 @@ func setSceneItemVisible(visible bool, scene string, items ...string) error {
 
 		r := sceneitems.SetSceneItemPropertiesParams{
 			SceneName: scene,
-			Item:      item,
+			Item:      &typedefs.Item{Name: item},
 			Bounds:    resp.Bounds,
 			Crop:      resp.Crop,
 			Position:  resp.Position,
@@ -108,7 +108,7 @@ func setSceneItemVisible(visible bool, scene string, items ...string) error {
 func toggleSceneItem(scene string, items ...string) error {
 	for _, item := range items {
 		p := sceneitems.GetSceneItemPropertiesParams{
-			Item:      item,
+			Item:      &typedefs.Item{Name: item},
 			SceneName: scene,
 		}
 		resp, err := client.SceneItems.GetSceneItemProperties(&p)

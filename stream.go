@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/andreykaipov/goobs/api/requests/streaming"
 	"github.com/spf13/cobra"
 )
 
@@ -23,17 +24,7 @@ var (
 )
 
 func startStream() error {
-	/*
-		resp, err := client.Streaming.GetStreamSettings()
-		if err != nil {
-			return err
-		}
-
-		r := streaming.StartStreamingParams{}
-		r.Stream.Settings = resp.Settings
-	*/
-
-	_, err := client.Streaming.StartStreaming(nil)
+	_, err := client.Streaming.StartStreaming(&streaming.StartStreamingParams{})
 	return err
 }
 
