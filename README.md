@@ -40,13 +40,13 @@ All commands support the following flags:
 
 Start streaming:
 
-```bash
+```
 obs-cli stream start
 ```
 
 Stop streaming:
 
-```bash
+```
 obs-cli stream stop
 ```
 
@@ -54,19 +54,19 @@ obs-cli stream stop
 
 Start recording:
 
-```bash
+```
 obs-cli recording start
 ```
 
 Stop recording:
 
-```bash
+```
 obs-cli recording stop
 ```
 
 Toggle recording:
 
-```bash
+```
 obs-cli recording toggle
 ```
 
@@ -74,7 +74,7 @@ obs-cli recording toggle
 
 Switch to a scene:
 
-```bash
+```
 obs-cli scene switch <scene>
 ```
 
@@ -82,39 +82,45 @@ obs-cli scene switch <scene>
 
 Change a FreeType text label:
 
-```bash
+```
 obs-cli label text <label> <text>
+```
+
+Trigger a countdown and continuously update a label with the remaining time:
+
+```
+obs-cli label countdown <label> <duration>
 ```
 
 ### Scene Items
 
 List all items of a scene:
 
-```bash
+```
 obs-cli sceneitem list <scene>
 ```
 
 Make a scene-item visible:
 
-```bash
+```
 obs-cli sceneitem show <scene> <item>
 ```
 
 Hide a scene-item:
 
-```bash
+```
 obs-cli sceneitem hide <scene> <item>
 ```
 
 Toggle visibility of a scene-item:
 
-```bash
+```
 obs-cli sceneitem toggle <scene> <item>
 ```
 
 Center a scene-item horizontally:
 
-```bash
+```
 obs-cli sceneitem center <scene> <item>
 ```
 
@@ -122,12 +128,12 @@ obs-cli sceneitem center <scene> <item>
 
 List special sources:
 
-```bash
+```
 obs-cli source list
 ```
 
 Toggle mute status of a source:
 
-```bash
+```
 obs-cli source toggle-mute <source>
 ```
