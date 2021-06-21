@@ -30,6 +30,14 @@ To install obs-cli, simply run:
 
 ## Usage
 
+All commands support the following flags:
+
+`--host`: which OBS instance to connect to
+`--port`: port to connect to
+`--password`: password used for authentication
+
+### Streams
+
 Start streaming:
 
 ```bash
@@ -41,6 +49,8 @@ Stop streaming:
 ```bash
 obs-cli stop-stream
 ```
+
+### Recordings
 
 Start recording:
 
@@ -60,22 +70,26 @@ Toggle recording:
 obs-cli toggle-recording
 ```
 
+### Scenes
+
 Switch to a scene:
 
 ```bash
 obs-cli switch-scene <scene>
 ```
 
-Change a FreeType text label:
-
-```bash
-obs-cli change-text <label> <text>
-```
-
 List all items of a scene:
 
 ```bash
 obs-cli list-sceneitems <scene>
+```
+
+### Scene Items
+
+Change a FreeType text label:
+
+```bash
+obs-cli change-text <label> <text>
 ```
 
 Make a scene-item visible:
@@ -89,6 +103,14 @@ Hide a scene-item:
 ```bash
 obs-cli hide-sceneitem <scene> <item>
 ```
+
+Toggle visibility of a scene-item:
+
+```bash
+obs-cli toggle-sceneitem <scene> <item>
+```
+
+### Sources
 
 List special sources:
 
