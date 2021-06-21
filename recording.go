@@ -5,8 +5,15 @@ import (
 )
 
 var (
+	recordingCmd = &cobra.Command{
+		Use:   "recording",
+		Short: "manage recordings",
+		Long:  `The recording command manages recordings`,
+		RunE:  nil,
+	}
+
 	startStopRecordingCmd = &cobra.Command{
-		Use:   "toggle-recording",
+		Use:   "toggle",
 		Short: "Toggle recording",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return starStopRecording()
@@ -14,7 +21,7 @@ var (
 	}
 
 	startRecordingCmd = &cobra.Command{
-		Use:   "start-recording",
+		Use:   "start",
 		Short: "Starts recording",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return startRecording()
@@ -22,7 +29,7 @@ var (
 	}
 
 	stopRecordingCmd = &cobra.Command{
-		Use:   "stop-recording",
+		Use:   "stop",
 		Short: "Stops recording",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return stopRecording()
@@ -46,7 +53,8 @@ func stopRecording() error {
 }
 
 func init() {
-	rootCmd.AddCommand(startStopRecordingCmd)
-	rootCmd.AddCommand(startRecordingCmd)
-	rootCmd.AddCommand(stopRecordingCmd)
+	recordingCmd.AddCommand(startStopRecordingCmd)
+	recordingCmd.AddCommand(startRecordingCmd)
+	recordingCmd.AddCommand(stopRecordingCmd)
+	rootCmd.AddCommand(recordingCmd)
 }

@@ -41,13 +41,13 @@ All commands support the following flags:
 Start streaming:
 
 ```bash
-obs-cli start-stream
+obs-cli stream start
 ```
 
 Stop streaming:
 
 ```bash
-obs-cli stop-stream
+obs-cli stream stop
 ```
 
 ### Recordings
@@ -55,19 +55,19 @@ obs-cli stop-stream
 Start recording:
 
 ```bash
-obs-cli start-recording
+obs-cli recording start
 ```
 
 Stop recording:
 
 ```bash
-obs-cli stop-recording
+obs-cli recording stop
 ```
 
 Toggle recording:
 
 ```bash
-obs-cli toggle-recording
+obs-cli recording toggle
 ```
 
 ### Scenes
@@ -75,45 +75,47 @@ obs-cli toggle-recording
 Switch to a scene:
 
 ```bash
-obs-cli switch-scene <scene>
+obs-cli scene switch <scene>
 ```
 
-List all items of a scene:
-
-```bash
-obs-cli list-sceneitems <scene>
-```
-
-### Scene Items
+### Labels
 
 Change a FreeType text label:
 
 ```bash
-obs-cli change-text <label> <text>
+obs-cli label text <label> <text>
+```
+
+### Scene Items
+
+List all items of a scene:
+
+```bash
+obs-cli sceneitem list <scene>
 ```
 
 Make a scene-item visible:
 
 ```bash
-obs-cli show-sceneitem <scene> <item>
+obs-cli sceneitem show <scene> <item>
 ```
 
 Hide a scene-item:
 
 ```bash
-obs-cli hide-sceneitem <scene> <item>
+obs-cli sceneitem hide <scene> <item>
 ```
 
 Toggle visibility of a scene-item:
 
 ```bash
-obs-cli toggle-sceneitem <scene> <item>
+obs-cli sceneitem toggle <scene> <item>
 ```
 
 Center a scene-item horizontally:
 
 ```bash
-obs-cli center-sceneitem <scene> <item>
+obs-cli sceneitem center <scene> <item>
 ```
 
 ### Sources
@@ -121,11 +123,11 @@ obs-cli center-sceneitem <scene> <item>
 List special sources:
 
 ```bash
-obs-cli list-sources
+obs-cli source list
 ```
 
 Toggle mute status of a source:
 
 ```bash
-obs-cli toggle-mute <source>
+obs-cli source toggle-mute <source>
 ```
