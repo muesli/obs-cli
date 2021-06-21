@@ -9,8 +9,9 @@ import (
 )
 
 var (
-	host string
-	port uint32
+	host     string
+	password string
+	port     uint32
 
 	rootCmd = &cobra.Command{
 		Use:   "obs-cli",
@@ -34,12 +35,13 @@ func main() {
 func init() {
 	cobra.OnInitialize(connectOBS)
 	rootCmd.PersistentFlags().StringVar(&host, "host", "localhost", "host to connect to")
+	rootCmd.PersistentFlags().StringVar(&password, "password", "", "password for connection")
 	rootCmd.PersistentFlags().Uint32VarP(&port, "port", "p", 4444, "port to connect to")
 }
 
 func connectOBS() {
 	var err error
-	client, err = goobs.New(host + fmt.Sprintf(":%d", port))
+	client, err = goobs.New(host+fmt.Sprintf(":%d", port), goobs.WithPassword(password))
 	if err != nil {
 		fmt.Println("error:", err)
 		os.Exit(1)
