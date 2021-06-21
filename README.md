@@ -32,9 +32,9 @@ To install obs-cli, simply run:
 
 All commands support the following flags:
 
-`--host`: which OBS instance to connect to
-`--port`: port to connect to
-`--password`: password used for authentication
+- `--host`: which OBS instance to connect to
+- `--port`: port to connect to
+- `--password`: password used for authentication
 
 ### Streams
 
