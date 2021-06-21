@@ -53,6 +53,17 @@ var (
 			return setSceneItemVisible(false, args[0], args[1:]...)
 		},
 	}
+
+	centerSceneItemCmd = &cobra.Command{
+		Use:   "center-sceneitem",
+		Short: "Horizontally centers a scene-item",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if len(args) < 2 {
+				return errors.New("center-sceneitem requires a scene and scene-item")
+			}
+			return centerSceneItem(args[0], args[1:]...)
+		},
+	}
 )
 
 func listSceneItems(scene string) error {
@@ -125,7 +136,46 @@ func toggleSceneItem(scene string, items ...string) error {
 	return nil
 }
 
+func centerSceneItem(scene string, items ...string) error {
+	for _, item := range items {
+		p := sceneitems.GetSceneItemPropertiesParams{
+			Item:      &typedefs.Item{Name: item},
+			SceneName: scene,
+		}
+		resp, err := client.SceneItems.GetSceneItemProperties(&p)
+		if err != nil {
+			return err
+		}
+
+		vresp, err := client.General.GetVideoInfo()
+		if err != nil {
+			return err
+		}
+
+		pos := resp.Position
+		pos.X = float64(vresp.BaseWidth) / 2
+		r := sceneitems.SetSceneItemPropertiesParams{
+			SceneName: scene,
+			Item:      &typedefs.Item{Name: item},
+			Bounds:    resp.Bounds,
+			Crop:      resp.Crop,
+			Position:  pos,
+			Rotation:  resp.Rotation,
+			Scale:     resp.Scale,
+			Visible:   resp.Visible,
+		}
+
+		_, err = client.SceneItems.SetSceneItemProperties(&r)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func init() {
+	rootCmd.AddCommand(centerSceneItemCmd)
 	rootCmd.AddCommand(listSceneItemsCmd)
 	rootCmd.AddCommand(toggleSceneItemCmd)
 	rootCmd.AddCommand(showSceneItemCmd)
