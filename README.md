@@ -110,6 +110,12 @@ Toggle visibility of a scene-item:
 obs-cli toggle-sceneitem <scene> <item>
 ```
 
+Center a scene-item horizontally:
+
+```bash
+obs-cli center-sceneitem <scene> <item>
+```
+
 ### Sources
 
 List special sources:
