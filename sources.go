@@ -1,18 +1,40 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 
+	"github.com/andreykaipov/goobs/api/requests/sources"
 	"github.com/spf13/cobra"
 )
 
-var listSourcesCmd = &cobra.Command{
-	Use:   "list-sources",
-	Short: "Lists all sources",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		return listSources()
-	},
-}
+var (
+	sourceCmd = &cobra.Command{
+		Use:   "source",
+		Short: "manage sources",
+		Long:  `The source command manages sources`,
+		RunE:  nil,
+	}
+
+	listSourcesCmd = &cobra.Command{
+		Use:   "list",
+		Short: "Lists all sources",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return listSources()
+		},
+	}
+
+	toggleMuteCmd = &cobra.Command{
+		Use:   "toggle-mute",
+		Short: "Toggles mute",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if len(args) < 1 {
+				return errors.New("toggle-mute requires a source name as argument")
+			}
+			return toggleMute(args[0])
+		},
+	}
+)
 
 func listSources() error {
 	/*
@@ -49,6 +71,17 @@ func listSources() error {
 	return nil
 }
 
+func toggleMute(source string) error {
+	p := sources.ToggleMuteParams{
+		Source: source,
+	}
+
+	_, err := client.Sources.ToggleMute(&p)
+	return err
+}
+
 func init() {
-	rootCmd.AddCommand(listSourcesCmd)
+	sourceCmd.AddCommand(listSourcesCmd)
+	sourceCmd.AddCommand(toggleMuteCmd)
+	rootCmd.AddCommand(sourceCmd)
 }

@@ -6,8 +6,15 @@ import (
 )
 
 var (
+	streamCmd = &cobra.Command{
+		Use:   "stream",
+		Short: "manage streams",
+		Long:  `The stream command manages streams`,
+		RunE:  nil,
+	}
+
 	startStreamCmd = &cobra.Command{
-		Use:   "start-stream",
+		Use:   "start",
 		Short: "Starts streaming",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return startStream()
@@ -15,7 +22,7 @@ var (
 	}
 
 	stopStreamCmd = &cobra.Command{
-		Use:   "stop-stream",
+		Use:   "stop",
 		Short: "Stops streaming",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return stopStream()
@@ -34,6 +41,7 @@ func stopStream() error {
 }
 
 func init() {
-	rootCmd.AddCommand(startStreamCmd)
-	rootCmd.AddCommand(stopStreamCmd)
+	streamCmd.AddCommand(startStreamCmd)
+	streamCmd.AddCommand(stopStreamCmd)
+	rootCmd.AddCommand(streamCmd)
 }
