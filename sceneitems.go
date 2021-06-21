@@ -4,7 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	obsws "github.com/muesli/go-obs-websocket"
+	sceneitems "github.com/andreykaipov/goobs/api/requests/scene_items"
+	"github.com/andreykaipov/goobs/api/typedefs"
 	"github.com/spf13/cobra"
 )
 
@@ -55,20 +56,18 @@ var (
 )
 
 func listSceneItems(scene string) error {
-	req := obsws.NewGetSceneListRequest()
-	resp, err := req.SendReceive(*client)
+	resp, err := client.Scenes.GetSceneList()
 	if err != nil {
 		return err
 	}
 
 	for _, v := range resp.Scenes {
-		if v["name"] != scene {
+		if v.Name != scene {
 			continue
 		}
 
-		for _, s := range v["sources"].([]interface{}) {
-			src := s.(map[string]interface{})
-			fmt.Println(src["name"])
+		for _, s := range v.Sources {
+			fmt.Println(s.Name)
 		}
 	}
 
@@ -77,31 +76,27 @@ func listSceneItems(scene string) error {
 
 func setSceneItemVisible(visible bool, scene string, items ...string) error {
 	for _, item := range items {
-		req := obsws.NewGetSceneItemPropertiesRequest(scene, item)
-		resp, err := req.SendReceive(*client)
+		p := sceneitems.GetSceneItemPropertiesParams{
+			Item:      &typedefs.Item{Name: item},
+			SceneName: scene,
+		}
+		resp, err := client.SceneItems.GetSceneItemProperties(&p)
 		if err != nil {
 			return err
 		}
 
-		chreq := obsws.NewSetSceneItemPropertiesRequest(
-			scene,
-			item,
-			resp.PositionX,
-			resp.PositionY,
-			resp.PositionAlignment,
-			resp.Rotation,
-			resp.ScaleX,
-			resp.ScaleY,
-			resp.CropTop,
-			resp.CropBottom,
-			resp.CropLeft,
-			resp.CropRight,
-			visible,
-			resp.BoundsType,
-			resp.BoundsAlignment,
-			resp.BoundsX,
-			resp.BoundsY)
-		err = chreq.Send(*client)
+		r := sceneitems.SetSceneItemPropertiesParams{
+			SceneName: scene,
+			Item:      &typedefs.Item{Name: item},
+			Bounds:    resp.Bounds,
+			Crop:      resp.Crop,
+			Position:  resp.Position,
+			Rotation:  resp.Rotation,
+			Scale:     resp.Scale,
+			Visible:   visible,
+		}
+
+		_, err = client.SceneItems.SetSceneItemProperties(&r)
 		if err != nil {
 			return err
 		}
@@ -112,8 +107,11 @@ func setSceneItemVisible(visible bool, scene string, items ...string) error {
 
 func toggleSceneItem(scene string, items ...string) error {
 	for _, item := range items {
-		req := obsws.NewGetSceneItemPropertiesRequest(scene, item)
-		resp, err := req.SendReceive(*client)
+		p := sceneitems.GetSceneItemPropertiesParams{
+			Item:      &typedefs.Item{Name: item},
+			SceneName: scene,
+		}
+		resp, err := client.SceneItems.GetSceneItemProperties(&p)
 		if err != nil {
 			return err
 		}

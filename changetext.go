@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 
-	obsws "github.com/muesli/go-obs-websocket"
+	"github.com/andreykaipov/goobs/api/requests/sources"
 	"github.com/spf13/cobra"
 )
 
@@ -19,30 +19,32 @@ var changeTextCmd = &cobra.Command{
 }
 
 func changeLabel(source string, text string) error {
-	req := obsws.NewGetTextFreetype2PropertiesRequest(source)
-	resp, err := req.SendReceive(*client)
+	p := sources.GetTextFreetype2PropertiesParams{
+		Source: source,
+	}
+
+	resp, err := client.Sources.GetTextFreetype2Properties(&p)
 	if err != nil {
 		return err
 	}
 
-	chreq := obsws.NewSetTextFreetype2PropertiesRequest(
-		source,
-		resp.Color1,
-		resp.Color2,
-		resp.CustomWidth,
-		resp.DropShadow,
-		resp.Font,
-		resp.FontFace,
-		resp.FontFlags,
-		resp.FontSize,
-		resp.FontStyle,
-		resp.FromFile,
-		resp.LogMode,
-		resp.Outline,
-		text,
-		resp.TextFile,
-		resp.WordWrap)
-	return chreq.Send(*client)
+	r := sources.SetTextFreetype2PropertiesParams{
+		Source:      source,
+		Color1:      resp.Color1,
+		Color2:      resp.Color2,
+		CustomWidth: resp.CustomWidth,
+		DropShadow:  resp.DropShadow,
+		Font:        resp.Font,
+		FromFile:    resp.FromFile,
+		LogMode:     resp.LogMode,
+		Outline:     resp.Outline,
+		Text:        text,
+		TextFile:    resp.TextFile,
+		WordWrap:    resp.WordWrap,
+	}
+
+	_, err = client.Sources.SetTextFreetype2Properties(&r)
+	return err
 }
 
 func init() {

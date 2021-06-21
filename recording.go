@@ -1,7 +1,6 @@
 package main
 
 import (
-	obsws "github.com/muesli/go-obs-websocket"
 	"github.com/spf13/cobra"
 )
 
@@ -32,18 +31,18 @@ var (
 )
 
 func starStopRecording() error {
-	req := obsws.NewStartStopRecordingRequest()
-	return req.Send(*client)
+	_, err := client.Recording.StartStopRecording()
+	return err
 }
 
 func startRecording() error {
-	req := obsws.NewStartRecordingRequest()
-	return req.Send(*client)
+	_, err := client.Recording.StartRecording()
+	return err
 }
 
 func stopRecording() error {
-	req := obsws.NewStopRecordingRequest()
-	return req.Send(*client)
+	_, err := client.Recording.StopRecording()
+	return err
 }
 
 func init() {

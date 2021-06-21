@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 
-	obsws "github.com/muesli/go-obs-websocket"
+	"github.com/andreykaipov/goobs/api/requests/sources"
 	"github.com/spf13/cobra"
 )
 
@@ -19,8 +19,12 @@ var toggleMuteCmd = &cobra.Command{
 }
 
 func toggleMute(source string) error {
-	req := obsws.NewToggleMuteRequest(source)
-	return req.Send(*client)
+	p := sources.ToggleMuteParams{
+		Source: source,
+	}
+
+	_, err := client.Sources.ToggleMute(&p)
+	return err
 }
 
 func init() {

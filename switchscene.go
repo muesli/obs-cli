@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	obsws "github.com/muesli/go-obs-websocket"
+	"github.com/andreykaipov/goobs/api/requests/scenes"
 	"github.com/spf13/cobra"
 )
 
@@ -20,8 +20,11 @@ var switchSceneCmd = &cobra.Command{
 }
 
 func switchScene(scene string) error {
-	req := obsws.NewSetCurrentSceneRequest(scene)
-	return req.Send(*client)
+	r := scenes.SetCurrentSceneParams{
+		SceneName: scene,
+	}
+	_, err := client.Scenes.SetCurrentScene(&r)
+	return err
 }
 
 func init() {
