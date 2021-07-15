@@ -13,6 +13,14 @@ var (
 		RunE:  nil,
 	}
 
+	startStopStreamCmd = &cobra.Command{
+		Use:   "toggle",
+		Short: "Toggle streaming",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return startStopStream()
+		},
+	}
+
 	startStreamCmd = &cobra.Command{
 		Use:   "start",
 		Short: "Starts streaming",
@@ -30,6 +38,11 @@ var (
 	}
 )
 
+func startStopStream() error {
+	_, err := client.Streaming.StartStopStreaming(&streaming.StartStopStreamingParams{})
+	return err
+}
+
 func startStream() error {
 	_, err := client.Streaming.StartStreaming(&streaming.StartStreamingParams{})
 	return err
@@ -41,6 +54,7 @@ func stopStream() error {
 }
 
 func init() {
+	streamCmd.AddCommand(startStopStreamCmd)
 	streamCmd.AddCommand(startStreamCmd)
 	streamCmd.AddCommand(stopStreamCmd)
 	rootCmd.AddCommand(streamCmd)
