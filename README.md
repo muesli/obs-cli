@@ -50,6 +50,12 @@ Stop streaming:
 obs-cli stream stop
 ```
 
+Toggle streaming:
+
+```
+obs-cli stream toggle
+```
+
 ### Recordings
 
 Start recording:
