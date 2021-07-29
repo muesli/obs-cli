@@ -1,6 +1,11 @@
 package main
 
 import (
+	"fmt"
+	"os"
+	"strconv"
+
+	"github.com/dustin/go-humanize"
 	"github.com/spf13/cobra"
 )
 
@@ -35,6 +40,14 @@ var (
 			return stopRecording()
 		},
 	}
+
+	recordingStatusCmd = &cobra.Command{
+		Use:   "status",
+		Short: "Reports recording status",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return recordingStatus()
+		},
+	}
 )
 
 func starStopRecording() error {
@@ -52,9 +65,35 @@ func stopRecording() error {
 	return err
 }
 
+func recordingStatus() error {
+	r, err := client.Recording.GetRecordingStatus()
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("Recording: %s\n", strconv.FormatBool(r.IsRecording))
+
+	if !r.IsRecording {
+		return nil
+	}
+
+	fmt.Printf("Paused: %s\n", strconv.FormatBool(r.IsRecordingPaused))
+	fmt.Printf("File: %s\n", r.RecordingFilename)
+	fmt.Printf("Timecode: %s\n", r.RecordTimecode)
+
+	st, err := os.Stat(r.RecordingFilename)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Filesize: %s\n", humanize.Bytes(uint64(st.Size())))
+
+	return nil
+}
+
 func init() {
 	recordingCmd.AddCommand(startStopRecordingCmd)
 	recordingCmd.AddCommand(startRecordingCmd)
 	recordingCmd.AddCommand(stopRecordingCmd)
+	recordingCmd.AddCommand(recordingStatusCmd)
 	rootCmd.AddCommand(recordingCmd)
 }
