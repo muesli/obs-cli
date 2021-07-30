@@ -3,7 +3,7 @@
 [![Latest Release](https://img.shields.io/github/release/muesli/obs-cli.svg)](https://github.com/muesli/obs-cli/releases)
 [![Build Status](https://github.com/muesli/obs-cli/workflows/build/badge.svg)](https://github.com/muesli/obs-cli/actions)
 [![Go ReportCard](https://goreportcard.com/badge/muesli/obs-cli)](https://goreportcard.com/report/muesli/obs-cli)
-[![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://godoc.org/github.com/muesli/obs-cli)
+[![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://pkg.go.dev/github.com/muesli/obs-cli)
 
 OBS-cli is a command-line remote control for OBS. It requires the
 [obs-websocket](https://github.com/Palakis/obs-websocket) plugin to be installed on your system.
