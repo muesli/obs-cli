@@ -56,6 +56,12 @@ Toggle streaming:
 obs-cli stream toggle
 ```
 
+Display streaming status:
+
+```
+obs-cli stream status
+```
+
 ### Recordings
 
 Start recording:
@@ -74,6 +80,12 @@ Toggle recording:
 
 ```
 obs-cli recording toggle
+```
+
+Display recording status:
+
+```
+obs-cli recording status
 ```
 
 ### Scenes
