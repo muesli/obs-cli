@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"strconv"
+
 	"github.com/andreykaipov/goobs/api/requests/streaming"
 	"github.com/spf13/cobra"
 )
@@ -36,6 +39,14 @@ var (
 			return stopStream()
 		},
 	}
+
+	streamStatusCmd = &cobra.Command{
+		Use:   "status",
+		Short: "Reports streaming status",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return streamStatus()
+		},
+	}
 )
 
 func startStopStream() error {
@@ -53,9 +64,32 @@ func stopStream() error {
 	return err
 }
 
+func streamStatus() error {
+	r, err := client.Streaming.GetStreamingStatus()
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("Streaming: %s\n", strconv.FormatBool(r.Streaming))
+	if !r.Streaming {
+		return nil
+	}
+
+	fmt.Printf("Timecode: %s\n", r.StreamTimecode)
+
+	rs, err := client.Streaming.GetStreamSettings()
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("URL: %s\n", rs.Settings.Server)
+	return nil
+}
+
 func init() {
 	streamCmd.AddCommand(startStopStreamCmd)
 	streamCmd.AddCommand(startStreamCmd)
 	streamCmd.AddCommand(stopStreamCmd)
+	streamCmd.AddCommand(streamStatusCmd)
 	rootCmd.AddCommand(streamCmd)
 }

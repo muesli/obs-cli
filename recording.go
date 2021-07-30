@@ -72,7 +72,6 @@ func recordingStatus() error {
 	}
 
 	fmt.Printf("Recording: %s\n", strconv.FormatBool(r.IsRecording))
-
 	if !r.IsRecording {
 		return nil
 	}
