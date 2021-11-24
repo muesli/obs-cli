@@ -157,3 +157,35 @@ Toggle mute status of a source:
 ```
 obs-cli source toggle-mute <source>
 ```
+
+### Studio Mode
+
+Disable the studio mode:
+
+```
+obs-cli studiomode disable
+```
+
+Enable the studio mode:
+
+```
+obs-cli studiomode enable
+```
+
+Display studio mode status:
+
+```
+obs-cli studiomode status
+```
+
+Toggle studio mode on and off:
+
+```
+obs-cli studiomode toggle
+```
+
+Transition to program (when the studio mode is enabled):
+
+```
+obs-cli studiomode transition
+```
