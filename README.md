@@ -40,21 +40,11 @@ All commands support the following flags:
 
 ### Streams
 
-Start streaming:
+Change the streaming state:
 
 ```
 obs-cli stream start
-```
-
-Stop streaming:
-
-```
 obs-cli stream stop
-```
-
-Toggle streaming:
-
-```
 obs-cli stream toggle
 ```
 
@@ -66,21 +56,11 @@ obs-cli stream status
 
 ### Recordings
 
-Start recording:
+Change the recording state:
 
 ```
 obs-cli recording start
-```
-
-Stop recording:
-
-```
 obs-cli recording stop
-```
-
-Toggle recording:
-
-```
 obs-cli recording toggle
 ```
 
@@ -120,21 +100,11 @@ List all items of a scene:
 obs-cli sceneitem list <scene>
 ```
 
-Make a scene-item visible:
+Change the visibility of a scene-item:
 
 ```
 obs-cli sceneitem show <scene> <item>
-```
-
-Hide a scene-item:
-
-```
 obs-cli sceneitem hide <scene> <item>
-```
-
-Toggle visibility of a scene-item:
-
-```
 obs-cli sceneitem toggle <scene> <item>
 ```
 
@@ -160,28 +130,18 @@ obs-cli source toggle-mute <source>
 
 ### Studio Mode
 
-Disable the studio mode:
-
-```
-obs-cli studiomode disable
-```
-
-Enable the studio mode:
+Enable or disable Studio Mode:
 
 ```
 obs-cli studiomode enable
+obs-cli studiomode disable
+obs-cli studiomode toggle
 ```
 
 Display studio mode status:
 
 ```
 obs-cli studiomode status
-```
-
-Toggle studio mode on and off:
-
-```
-obs-cli studiomode toggle
 ```
 
 Transition to program (when the studio mode is enabled):
