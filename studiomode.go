@@ -67,13 +67,19 @@ func enableStudioMode() error {
 	return err
 }
 
-func studioModeStatus() error {
+// Determine if the studio mode is currently enabled in OBS.
+func IsStudioModeEnabled() (bool, error) {
 	r, err := client.StudioMode.GetStudioModeStatus()
+	return r.StudioMode, err
+}
+
+func studioModeStatus() error {
+	isStudioModeEnabled, err := IsStudioModeEnabled()
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Studio Mode: %s\n", strconv.FormatBool(r.StudioMode))
+	fmt.Printf("Studio Mode: %s\n", strconv.FormatBool(isStudioModeEnabled))
 	return nil
 }
 

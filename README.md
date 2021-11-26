@@ -72,7 +72,19 @@ obs-cli recording status
 
 ### Scenes
 
-Switch to a scene:
+Switch program to a scene:
+
+```
+obs-cli scene current <scene>
+```
+
+Switch preview to a scene (studio mode must be enabled):
+
+```
+obs-cli scene preview <scene>
+```
+
+Switch program (studio mode disabled) or preview (studio mode enabled) to a scene:
 
 ```
 obs-cli scene switch <scene>
