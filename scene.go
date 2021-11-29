@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/andreykaipov/goobs/api/requests/scenes"
@@ -28,6 +29,14 @@ var (
 		},
 	}
 
+	listSceneCmd = &cobra.Command{
+		Use:   "list",
+		Short: "List all scene names",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return listScenes()
+		},
+	}
+
 	previewSceneCmd = &cobra.Command{
 		Use:   "preview",
 		Short: "Switch preview to a different scene (studio mode must be enabled)",
@@ -50,6 +59,18 @@ var (
 		},
 	}
 )
+
+func listScenes() error {
+	r, err := client.Scenes.GetSceneList()
+	if err != nil {
+		return err
+	}
+
+	for _, v := range r.Scenes {
+		fmt.Println(v.Name)
+	}
+	return nil
+}
 
 func setCurrentScene(scene string) error {
 	r := scenes.SetCurrentSceneParams{
@@ -81,6 +102,7 @@ func switchScene(scene string) error {
 
 func init() {
 	sceneCmd.AddCommand(currentSceneCmd)
+	sceneCmd.AddCommand(listSceneCmd)
 	sceneCmd.AddCommand(previewSceneCmd)
 	sceneCmd.AddCommand(switchSceneCmd)
 	rootCmd.AddCommand(sceneCmd)
