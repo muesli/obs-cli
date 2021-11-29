@@ -72,6 +72,12 @@ obs-cli recording status
 
 ### Scenes
 
+List all scene names:
+
+```
+obs-cli scene list
+```
+
 Switch program to a scene:
 
 ```
