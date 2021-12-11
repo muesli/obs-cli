@@ -28,7 +28,7 @@ working Go environment (Go 1.11 or higher is required). See the
 
 To install obs-cli, simply run:
 
-    go get github.com/muesli/obs-cli
+    go install github.com/muesli/obs-cli@latest
 
 ## Usage
 
