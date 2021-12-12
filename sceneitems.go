@@ -11,10 +11,11 @@ import (
 
 var (
 	sceneItemCmd = &coral.Command{
-		Use:   "sceneitem",
-		Short: "manage scene items",
-		Long:  `The sceneitem command manages a scene's items`,
-		RunE:  nil,
+		Use:              "sceneitem",
+		Short:            "manage scene items",
+		Long:             `The sceneitem command manages a scene's items`,
+		RunE:             nil,
+		PersistentPreRun: connectOBSCommand,
 	}
 
 	listSceneItemsCmd = &coral.Command{

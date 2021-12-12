@@ -10,10 +10,11 @@ import (
 
 var (
 	studioModeCmd = &coral.Command{
-		Use:   "studiomode",
-		Short: "manage studio mode",
-		Long:  `The studiomode command manages the studio mode`,
-		RunE:  nil,
+		Use:              "studiomode",
+		Short:            "manage studio mode",
+		Long:             `The studiomode command manages the studio mode`,
+		RunE:             nil,
+		PersistentPreRun: connectOBSCommand,
 	}
 
 	disableStudioModeCmd = &coral.Command{

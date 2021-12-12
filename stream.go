@@ -10,10 +10,11 @@ import (
 
 var (
 	streamCmd = &coral.Command{
-		Use:   "stream",
-		Short: "manage streams",
-		Long:  `The stream command manages streams`,
-		RunE:  nil,
+		Use:              "stream",
+		Short:            "manage streams",
+		Long:             `The stream command manages streams`,
+		RunE:             nil,
+		PersistentPreRun: connectOBSCommand,
 	}
 
 	startStopStreamCmd = &coral.Command{

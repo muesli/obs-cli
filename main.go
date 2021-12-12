@@ -35,7 +35,6 @@ func main() {
 }
 
 func init() {
-	coral.OnInitialize(connectOBS)
 	rootCmd.PersistentFlags().StringVar(&host, "host", "localhost", "host to connect to")
 	rootCmd.PersistentFlags().StringVar(&password, "password", "", "password for connection")
 	rootCmd.PersistentFlags().Uint32VarP(&port, "port", "p", 4444, "port to connect to")
@@ -47,6 +46,10 @@ func getUserAgent() string {
 		userAgent += "/" + version
 	}
 	return userAgent
+}
+
+func connectOBSCommand(cmd *coral.Command, args []string) {
+	connectOBS()
 }
 
 func connectOBS() {
