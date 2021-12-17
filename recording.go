@@ -21,7 +21,7 @@ var (
 		Use:   "toggle",
 		Short: "Toggle recording",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return starStopRecording()
+			return startStopRecording()
 		},
 	}
 
@@ -41,6 +41,35 @@ var (
 		},
 	}
 
+	pauseRecordingCmd = &cobra.Command{
+		Use:   "pause",
+		Short: "manage paused state",
+	}
+
+	enablePauseRecordingCmd = &cobra.Command{
+		Use:   "enable",
+		Short: "Pause recording",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return pauseRecording()
+		},
+	}
+
+	resumePauseRecordingCmd = &cobra.Command{
+		Use:   "resume",
+		Short: "Resume recording",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return resumeRecording()
+		},
+	}
+
+	togglePauseRecordingCmd = &cobra.Command{
+		Use:   "toggle",
+		Short: "Pause/resume recording",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return pauseResumeRecording()
+		},
+	}
+
 	recordingStatusCmd = &cobra.Command{
 		Use:   "status",
 		Short: "Reports recording status",
@@ -50,7 +79,7 @@ var (
 	}
 )
 
-func starStopRecording() error {
+func startStopRecording() error {
 	_, err := client.Recording.StartStopRecording()
 	return err
 }
@@ -63,6 +92,31 @@ func startRecording() error {
 func stopRecording() error {
 	_, err := client.Recording.StopRecording()
 	return err
+}
+
+func pauseRecording() error {
+	_, err := client.Recording.PauseRecording()
+	return err
+}
+
+func resumeRecording() error {
+	_, err := client.Recording.ResumeRecording()
+	return err
+}
+
+func pauseResumeRecording() error {
+	r, err := client.Recording.GetRecordingStatus()
+	if err != nil {
+		return err
+	}
+	if !*r.IsRecording {
+		return fmt.Errorf("recording is not running")
+	}
+
+	if *r.IsRecordingPaused {
+		return resumeRecording()
+	}
+	return pauseRecording()
 }
 
 func recordingStatus() error {
@@ -90,9 +144,15 @@ func recordingStatus() error {
 }
 
 func init() {
+	pauseRecordingCmd.AddCommand(enablePauseRecordingCmd)
+	pauseRecordingCmd.AddCommand(resumePauseRecordingCmd)
+	pauseRecordingCmd.AddCommand(togglePauseRecordingCmd)
+
 	recordingCmd.AddCommand(startStopRecordingCmd)
 	recordingCmd.AddCommand(startRecordingCmd)
 	recordingCmd.AddCommand(stopRecordingCmd)
+	recordingCmd.AddCommand(pauseRecordingCmd)
 	recordingCmd.AddCommand(recordingStatusCmd)
+
 	rootCmd.AddCommand(recordingCmd)
 }
