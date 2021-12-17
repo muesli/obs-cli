@@ -167,3 +167,23 @@ Transition to program (when the studio mode is enabled):
 ```
 obs-cli studiomode transition
 ```
+
+### Profiles
+
+List all profiles:
+
+```
+obs-cli profile list
+```
+
+Show the current profile:
+
+```
+obs-cli profile get
+```
+
+Switch to a profile:
+
+```
+obs-cli profile set <profile>
+```
