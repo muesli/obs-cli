@@ -216,3 +216,19 @@ Switch to a profile:
 ```
 obs-cli profile set <profile>
 ```
+
+### Virtual Camera
+
+Change the virtual camera state:
+
+```
+obs-cli virtualcam start
+obs-cli virtualcam stop
+obs-cli virtualcam toggle
+```
+
+Display virtual camera status:
+
+```
+obs-cli virtualcam status
+```
