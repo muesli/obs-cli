@@ -96,18 +96,24 @@ Switch program (studio mode disabled) or preview (studio mode enabled) to a scen
 obs-cli scene switch <scene>
 ```
 
-### Labels
+### Scene Collections
 
-Change a FreeType text label:
-
-```
-obs-cli label text <label> <text>
-```
-
-Trigger a countdown and continuously update a label with the remaining time:
+List all scene collections:
 
 ```
-obs-cli label countdown <label> <duration>
+obs-cli scenecollection list
+```
+
+Show the current scene collection:
+
+```
+obs-cli scenecollection get
+```
+
+Switch to a scene collection:
+
+```
+obs-cli scenecollection set <scenecollection>
 ```
 
 ### Scene Items
@@ -130,6 +136,20 @@ Center a scene-item horizontally:
 
 ```
 obs-cli sceneitem center <scene> <item>
+```
+
+### Labels
+
+Change a FreeType text label:
+
+```
+obs-cli label text <label> <text>
+```
+
+Trigger a countdown and continuously update a label with the remaining time:
+
+```
+obs-cli label countdown <label> <duration>
 ```
 
 ### Sources
