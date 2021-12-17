@@ -6,7 +6,8 @@
 [![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://pkg.go.dev/github.com/muesli/obs-cli)
 
 OBS-cli is a command-line remote control for OBS. It requires the
-[obs-websocket](https://github.com/Palakis/obs-websocket) plugin to be installed on your system.
+[obs-websocket](https://github.com/Palakis/obs-websocket) plugin to be installed
+on your system.
 
 ## Installation
 
@@ -62,6 +63,14 @@ Change the recording state:
 obs-cli recording start
 obs-cli recording stop
 obs-cli recording toggle
+```
+
+Pause or resume a recording:
+
+```
+obs-cli recording pause enable
+obs-cli recording pause resume
+obs-cli recording pause toggle
 ```
 
 Display recording status:
