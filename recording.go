@@ -71,12 +71,12 @@ func recordingStatus() error {
 		return err
 	}
 
-	fmt.Printf("Recording: %s\n", strconv.FormatBool(r.IsRecording))
-	if !r.IsRecording {
+	fmt.Printf("Recording: %s\n", strconv.FormatBool(*r.IsRecording))
+	if !*r.IsRecording {
 		return nil
 	}
 
-	fmt.Printf("Paused: %s\n", strconv.FormatBool(r.IsRecordingPaused))
+	fmt.Printf("Paused: %s\n", strconv.FormatBool(*r.IsRecordingPaused))
 	fmt.Printf("File: %s\n", r.RecordingFilename)
 	fmt.Printf("Timecode: %s\n", r.RecordTimecode)
 

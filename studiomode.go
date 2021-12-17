@@ -70,7 +70,7 @@ func enableStudioMode() error {
 // Determine if the studio mode is currently enabled in OBS.
 func IsStudioModeEnabled() (bool, error) {
 	r, err := client.StudioMode.GetStudioModeStatus()
-	return r.StudioMode, err
+	return *r.StudioMode, err
 }
 
 func studioModeStatus() error {

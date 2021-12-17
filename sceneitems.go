@@ -112,7 +112,7 @@ func setSceneItemVisible(visible bool, scene string, items ...string) error {
 			Rotation:  resp.Rotation,
 			Scale:     resp.Scale,
 			Locked:    resp.Locked,
-			Visible:   visible,
+			Visible:   &visible,
 		}
 
 		_, err = client.SceneItems.SetSceneItemProperties(&r)
@@ -135,7 +135,7 @@ func toggleSceneItem(scene string, items ...string) error {
 			return err
 		}
 
-		err = setSceneItemVisible(!resp.Visible, scene, item)
+		err = setSceneItemVisible(!*resp.Visible, scene, item)
 		if err != nil {
 			return err
 		}
