@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/andreykaipov/goobs/api/requests/studio_mode"
+	studiomode "github.com/andreykaipov/goobs/api/requests/studio_mode"
 	"github.com/spf13/cobra"
 )
 
