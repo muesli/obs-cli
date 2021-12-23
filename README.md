@@ -217,6 +217,27 @@ Switch to a profile:
 obs-cli profile set <profile>
 ```
 
+### Replay Buffer
+
+Change the replay buffer state:
+
+```
+obs-cli replaybuffer start
+obs-cli replaybuffer stop
+```
+
+Save the replay buffer:
+
+```
+obs-cli replaybuffer save
+```
+
+Display replay buffer status:
+
+```
+obs-cli replaybuffer status
+```
+
 ### Virtual Camera
 
 Change the virtual camera state:
