@@ -37,6 +37,14 @@ var (
 		},
 	}
 
+	getSceneCmd = &cobra.Command{
+		Use:   "get",
+		Short: "Get the current scene",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return getScene()
+		},
+	}
+
 	previewSceneCmd = &cobra.Command{
 		Use:   "preview",
 		Short: "Switch preview to a different scene (studio mode must be enabled)",
@@ -72,6 +80,16 @@ func listScenes() error {
 	return nil
 }
 
+func getScene() error {
+	r, err := client.Scenes.GetCurrentScene()
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(r.Name)
+	return nil
+}
+
 func setCurrentScene(scene string) error {
 	r := scenes.SetCurrentSceneParams{
 		SceneName: scene,
@@ -103,6 +121,7 @@ func switchScene(scene string) error {
 func init() {
 	sceneCmd.AddCommand(currentSceneCmd)
 	sceneCmd.AddCommand(listSceneCmd)
+	sceneCmd.AddCommand(getSceneCmd)
 	sceneCmd.AddCommand(previewSceneCmd)
 	sceneCmd.AddCommand(switchSceneCmd)
 	rootCmd.AddCommand(sceneCmd)
