@@ -87,6 +87,12 @@ List all scene names:
 obs-cli scene list
 ```
 
+Show the current scene name:
+
+```
+obs-cli scene get
+```
+
 Switch program to a scene:
 
 ```
