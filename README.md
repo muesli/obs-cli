@@ -147,6 +147,12 @@ obs-cli sceneitem hide <scene> <item>
 obs-cli sceneitem toggle <scene> <item>
 ```
 
+View the visibility of a scene-item:
+
+```
+obs-cli sceneitem visible <scene> <item>
+```
+
 Center a scene-item horizontally:
 
 ```
