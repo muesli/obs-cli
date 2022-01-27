@@ -61,6 +61,17 @@ var (
 		},
 	}
 
+	getSceneItemVisibilityCmd = &cobra.Command{
+		Use:   "visible",
+		Short: "Show visibility status of a scene-item",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if len(args) < 2 {
+				return errors.New("visible requires a scene and scene-item")
+			}
+			return getSceneItemVisibility(args[0], args[1:]...)
+		},
+	}
+
 	centerSceneItemCmd = &cobra.Command{
 		Use:   "center",
 		Short: "Horizontally centers a scene-item",
@@ -144,6 +155,23 @@ func toggleSceneItem(scene string, items ...string) error {
 	return nil
 }
 
+func getSceneItemVisibility(scene string, items ...string) error {
+	for _, item := range items {
+		p := sceneitems.GetSceneItemPropertiesParams{
+			Item:      &typedefs.Item{Name: item},
+			SceneName: scene,
+		}
+		resp, err := client.SceneItems.GetSceneItemProperties(&p)
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("%s: %t\n", resp.Name, *resp.Visible)
+	}
+
+	return nil
+}
+
 func centerSceneItem(scene string, items ...string) error {
 	for _, item := range items {
 		p := sceneitems.GetSceneItemPropertiesParams{
@@ -188,6 +216,7 @@ func init() {
 	sceneItemCmd.AddCommand(toggleSceneItemCmd)
 	sceneItemCmd.AddCommand(showSceneItemCmd)
 	sceneItemCmd.AddCommand(hideSceneItemCmd)
+	sceneItemCmd.AddCommand(getSceneItemVisibilityCmd)
 	sceneItemCmd.AddCommand(listSceneItemsCmd)
 	rootCmd.AddCommand(sceneItemCmd)
 }
