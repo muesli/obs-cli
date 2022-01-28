@@ -109,11 +109,11 @@ func pauseResumeRecording() error {
 	if err != nil {
 		return err
 	}
-	if !*r.IsRecording {
+	if !r.IsRecording {
 		return fmt.Errorf("recording is not running")
 	}
 
-	if *r.IsRecordingPaused {
+	if r.IsRecordingPaused {
 		return resumeRecording()
 	}
 	return pauseRecording()
@@ -125,12 +125,12 @@ func recordingStatus() error {
 		return err
 	}
 
-	fmt.Printf("Recording: %s\n", strconv.FormatBool(*r.IsRecording))
-	if !*r.IsRecording {
+	fmt.Printf("Recording: %s\n", strconv.FormatBool(r.IsRecording))
+	if !r.IsRecording {
 		return nil
 	}
 
-	fmt.Printf("Paused: %s\n", strconv.FormatBool(*r.IsRecordingPaused))
+	fmt.Printf("Paused: %s\n", strconv.FormatBool(r.IsRecordingPaused))
 	fmt.Printf("File: %s\n", r.RecordingFilename)
 	fmt.Printf("Timecode: %s\n", r.RecordTimecode)
 

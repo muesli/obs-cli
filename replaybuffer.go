@@ -69,7 +69,7 @@ func replayBufferStatus() error {
 		return err
 	}
 
-	fmt.Printf("Replay Buffer active: %s\n", strconv.FormatBool(*r.IsReplayBufferActive))
+	fmt.Printf("Replay Buffer active: %s\n", strconv.FormatBool(r.IsReplayBufferActive))
 	return nil
 }
 

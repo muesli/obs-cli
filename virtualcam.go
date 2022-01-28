@@ -69,8 +69,8 @@ func virtualCamStatus() error {
 		return err
 	}
 
-	fmt.Printf("Virtual camera: %s\n", strconv.FormatBool(*r.IsVirtualCam))
-	if !*r.IsVirtualCam {
+	fmt.Printf("Virtual camera: %s\n", strconv.FormatBool(r.IsVirtualCam))
+	if !r.IsVirtualCam {
 		return nil
 	}
 

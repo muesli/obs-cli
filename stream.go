@@ -70,8 +70,8 @@ func streamStatus() error {
 		return err
 	}
 
-	fmt.Printf("Streaming: %s\n", strconv.FormatBool(*r.Streaming))
-	if !*r.Streaming {
+	fmt.Printf("Streaming: %s\n", strconv.FormatBool(r.Streaming))
+	if !r.Streaming {
 		return nil
 	}
 

@@ -42,14 +42,14 @@ func changeLabel(source string, text string) error {
 		Color1:      resp.Color1,
 		Color2:      resp.Color2,
 		CustomWidth: resp.CustomWidth,
-		DropShadow:  resp.DropShadow,
+		DropShadow:  &resp.DropShadow,
 		Font:        resp.Font,
-		FromFile:    resp.FromFile,
-		LogMode:     resp.LogMode,
-		Outline:     resp.Outline,
+		FromFile:    &resp.FromFile,
+		LogMode:     &resp.LogMode,
+		Outline:     &resp.Outline,
 		Text:        text,
 		TextFile:    resp.TextFile,
-		WordWrap:    resp.WordWrap,
+		WordWrap:    &resp.WordWrap,
 	}
 
 	_, err = client.Sources.SetTextFreetype2Properties(&r)
