@@ -147,7 +147,7 @@ obs-cli sceneitem hide <scene> <item>
 obs-cli sceneitem toggle <scene> <item>
 ```
 
-View the visibility of a scene-item:
+Display the visibility of a scene-item:
 
 ```
 obs-cli sceneitem visible <scene> <item>
