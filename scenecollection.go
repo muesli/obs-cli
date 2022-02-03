@@ -6,37 +6,37 @@ import (
 	"strings"
 
 	scenecollections "github.com/andreykaipov/goobs/api/requests/scene_collections"
-	"github.com/spf13/cobra"
+	"github.com/muesli/coral"
 )
 
 var (
-	sceneCollectionCmd = &cobra.Command{
+	sceneCollectionCmd = &coral.Command{
 		Use:   "scenecollection",
 		Short: "manage scene collections",
 		Long:  `The scenecollection command manages scene collections`,
 		RunE:  nil,
 	}
 
-	listSceneCollectionCmd = &cobra.Command{
+	listSceneCollectionCmd = &coral.Command{
 		Use:   "list",
 		Short: "List all scene collections",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return listSceneCollections()
 		},
 	}
 
-	getSceneCollectionCmd = &cobra.Command{
+	getSceneCollectionCmd = &coral.Command{
 		Use:   "get",
 		Short: "Get the current scene collection",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return getSceneCollection()
 		},
 	}
 
-	setSceneCollectionCmd = &cobra.Command{
+	setSceneCollectionCmd = &coral.Command{
 		Use:   "set",
 		Short: "Set the current scene collection",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 1 {
 				return errors.New("set requires a scene collection name as argument")
 			}

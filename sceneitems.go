@@ -6,21 +6,21 @@ import (
 
 	sceneitems "github.com/andreykaipov/goobs/api/requests/scene_items"
 	"github.com/andreykaipov/goobs/api/typedefs"
-	"github.com/spf13/cobra"
+	"github.com/muesli/coral"
 )
 
 var (
-	sceneItemCmd = &cobra.Command{
+	sceneItemCmd = &coral.Command{
 		Use:   "sceneitem",
 		Short: "manage scene items",
 		Long:  `The sceneitem command manages a scene's items`,
 		RunE:  nil,
 	}
 
-	listSceneItemsCmd = &cobra.Command{
+	listSceneItemsCmd = &coral.Command{
 		Use:   "list",
 		Short: "Lists all items of a scene",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 1 {
 				return errors.New("list requires a scene")
 			}
@@ -28,10 +28,10 @@ var (
 		},
 	}
 
-	toggleSceneItemCmd = &cobra.Command{
+	toggleSceneItemCmd = &coral.Command{
 		Use:   "toggle",
 		Short: "Toggles visibility of a scene-item",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 2 {
 				return errors.New("toggle requires a scene and scene-item")
 			}
@@ -39,10 +39,10 @@ var (
 		},
 	}
 
-	showSceneItemCmd = &cobra.Command{
+	showSceneItemCmd = &coral.Command{
 		Use:   "show",
 		Short: "Makes a scene-item visible",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 2 {
 				return errors.New("show requires a scene and scene-item(s)")
 			}
@@ -50,10 +50,10 @@ var (
 		},
 	}
 
-	hideSceneItemCmd = &cobra.Command{
+	hideSceneItemCmd = &coral.Command{
 		Use:   "hide",
 		Short: "Hides a scene-item",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 2 {
 				return errors.New("hide requires a scene and scene-item(s)")
 			}
@@ -61,10 +61,10 @@ var (
 		},
 	}
 
-	getSceneItemVisibilityCmd = &cobra.Command{
+	getSceneItemVisibilityCmd = &coral.Command{
 		Use:   "visible",
 		Short: "Show visibility status of a scene-item",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 2 {
 				return errors.New("visible requires a scene and scene-item")
 			}
@@ -72,10 +72,10 @@ var (
 		},
 	}
 
-	centerSceneItemCmd = &cobra.Command{
+	centerSceneItemCmd = &coral.Command{
 		Use:   "center",
 		Short: "Horizontally centers a scene-item",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 2 {
 				return errors.New("center requires a scene and scene-item")
 			}

@@ -4,45 +4,45 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/spf13/cobra"
+	"github.com/muesli/coral"
 )
 
 var (
-	virtualCamCmd = &cobra.Command{
+	virtualCamCmd = &coral.Command{
 		Use:   "virtualcam",
 		Short: "manage virtual camera",
 		Long:  `The virtualcam command manages the virtual camera`,
 		RunE:  nil,
 	}
 
-	startStopVirtualCamCmd = &cobra.Command{
+	startStopVirtualCamCmd = &coral.Command{
 		Use:   "toggle",
 		Short: "Toggle virtual camera status",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return starStopVirtualCam()
 		},
 	}
 
-	startVirtualCamCmd = &cobra.Command{
+	startVirtualCamCmd = &coral.Command{
 		Use:   "start",
 		Short: "Starts virtual camera",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return startVirtualCam()
 		},
 	}
 
-	stopVirtualCamCmd = &cobra.Command{
+	stopVirtualCamCmd = &coral.Command{
 		Use:   "stop",
 		Short: "Stops virtual camera",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return stopVirtualCam()
 		},
 	}
 
-	virtualCamStatusCmd = &cobra.Command{
+	virtualCamStatusCmd = &coral.Command{
 		Use:   "status",
 		Short: "Reports virtual camera status",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return virtualCamStatus()
 		},
 	}
