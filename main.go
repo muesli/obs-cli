@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/andreykaipov/goobs"
-	"github.com/spf13/cobra"
+	"github.com/muesli/coral"
 )
 
 var (
@@ -15,7 +15,7 @@ var (
 	port     uint32
 	version  string
 
-	rootCmd = &cobra.Command{
+	rootCmd = &coral.Command{
 		Use:   "obs-cli",
 		Short: "obs-cli is a command-line remote control for OBS",
 	}
@@ -35,7 +35,7 @@ func main() {
 }
 
 func init() {
-	cobra.OnInitialize(connectOBS)
+	coral.OnInitialize(connectOBS)
 	rootCmd.PersistentFlags().StringVar(&host, "host", "localhost", "host to connect to")
 	rootCmd.PersistentFlags().StringVar(&password, "password", "", "password for connection")
 	rootCmd.PersistentFlags().Uint32VarP(&port, "port", "p", 4444, "port to connect to")

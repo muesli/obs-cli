@@ -6,37 +6,37 @@ import (
 	"strings"
 
 	"github.com/andreykaipov/goobs/api/requests/profiles"
-	"github.com/spf13/cobra"
+	"github.com/muesli/coral"
 )
 
 var (
-	profileCmd = &cobra.Command{
+	profileCmd = &coral.Command{
 		Use:   "profile",
 		Short: "manage profiles",
 		Long:  `The profile command manages profiles`,
 		RunE:  nil,
 	}
 
-	listProfileCmd = &cobra.Command{
+	listProfileCmd = &coral.Command{
 		Use:   "list",
 		Short: "List all profiles",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return listProfiles()
 		},
 	}
 
-	getProfileCmd = &cobra.Command{
+	getProfileCmd = &coral.Command{
 		Use:   "get",
 		Short: "Get the current profile",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return getProfile()
 		},
 	}
 
-	setProfileCmd = &cobra.Command{
+	setProfileCmd = &coral.Command{
 		Use:   "set",
 		Short: "Set the current profile",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 1 {
 				return errors.New("set requires a profile name as argument")
 			}

@@ -5,29 +5,29 @@ import (
 	"fmt"
 
 	"github.com/andreykaipov/goobs/api/requests/sources"
-	"github.com/spf13/cobra"
+	"github.com/muesli/coral"
 )
 
 var (
-	sourceCmd = &cobra.Command{
+	sourceCmd = &coral.Command{
 		Use:   "source",
 		Short: "manage sources",
 		Long:  `The source command manages sources`,
 		RunE:  nil,
 	}
 
-	listSourcesCmd = &cobra.Command{
+	listSourcesCmd = &coral.Command{
 		Use:   "list",
 		Short: "Lists all sources",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			return listSources()
 		},
 	}
 
-	toggleMuteCmd = &cobra.Command{
+	toggleMuteCmd = &coral.Command{
 		Use:   "toggle-mute",
 		Short: "Toggles mute",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *coral.Command, args []string) error {
 			if len(args) < 1 {
 				return errors.New("toggle-mute requires a source name as argument")
 			}
