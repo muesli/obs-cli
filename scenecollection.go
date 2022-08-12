@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	scenecollections "github.com/andreykaipov/goobs/api/requests/scene_collections"
+	"github.com/andreykaipov/goobs/api/requests/config"
 	"github.com/muesli/coral"
 )
 
@@ -46,32 +46,32 @@ var (
 )
 
 func listSceneCollections() error {
-	r, err := client.SceneCollections.ListSceneCollections()
+	r, err := client.Config.GetSceneCollectionList()
 	if err != nil {
 		return err
 	}
 
 	for _, v := range r.SceneCollections {
-		fmt.Println(v.ScName)
+		fmt.Println(v)
 	}
 	return nil
 }
 
 func setSceneCollection(collection string) error {
-	r := scenecollections.SetCurrentSceneCollectionParams{
-		ScName: collection,
+	r := config.SetCurrentSceneCollectionParams{
+		SceneCollectionName: collection,
 	}
-	_, err := client.SceneCollections.SetCurrentSceneCollection(&r)
+	_, err := client.Config.SetCurrentSceneCollection(&r)
 	return err
 }
 
 func getSceneCollection() error {
-	r, err := client.SceneCollections.GetCurrentSceneCollection()
+	r, err := client.Config.GetSceneCollectionList()
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(r.ScName)
+	fmt.Println(r.CurrentSceneCollectionName)
 	return nil
 }
 

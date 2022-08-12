@@ -49,32 +49,33 @@ var (
 )
 
 func starStopVirtualCam() error {
-	_, err := client.VirtualCam.StartStopVirtualCam()
+	_, err := client.Outputs.ToggleVirtualCam()
 	return err
 }
 
 func startVirtualCam() error {
-	_, err := client.VirtualCam.StartVirtualCam()
+	_, err := client.Outputs.StartVirtualCam()
 	return err
 }
 
 func stopVirtualCam() error {
-	_, err := client.VirtualCam.StopVirtualCam()
+	_, err := client.Outputs.StopVirtualCam()
 	return err
 }
 
 func virtualCamStatus() error {
-	r, err := client.VirtualCam.GetVirtualCamStatus()
+	r, err := client.Outputs.GetVirtualCamStatus()
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Virtual camera: %s\n", strconv.FormatBool(r.IsVirtualCam))
-	if !r.IsVirtualCam {
+	fmt.Printf("Virtual camera: %s\n", strconv.FormatBool(r.OutputActive))
+	if !r.OutputActive {
 		return nil
 	}
 
-	fmt.Printf("Timecode: %s\n", r.VirtualCamTimecode)
+	// TODO: see if virtual cam timecode is available with different API
+	// fmt.Printf("Timecode: %s\n", r.Ou)
 	return nil
 }
 
