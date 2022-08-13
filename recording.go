@@ -103,18 +103,8 @@ func resumeRecording() error {
 }
 
 func pauseResumeRecording() error {
-	r, err := client.Record.GetRecordStatus()
-	if err != nil {
-		return err
-	}
-	if !r.OutputActive {
-		return fmt.Errorf("recording is not running")
-	}
-
-	if r.OuputPaused {
-		return resumeRecording()
-	}
-	return pauseRecording()
+	_, err := client.Record.ToggleRecordPause()
+	return err
 }
 
 func recordingStatus() error {
