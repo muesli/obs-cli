@@ -2,10 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 
-	"github.com/dustin/go-humanize"
 	"github.com/muesli/coral"
 )
 
@@ -80,65 +78,56 @@ var (
 )
 
 func startStopRecording() error {
-	_, err := client.Recording.StartStopRecording()
+	_, err := client.Record.ToggleRecord()
 	return err
 }
 
 func startRecording() error {
-	_, err := client.Recording.StartRecording()
+	_, err := client.Record.StartRecord()
 	return err
 }
 
 func stopRecording() error {
-	_, err := client.Recording.StopRecording()
+	_, err := client.Record.StopRecord()
 	return err
 }
 
 func pauseRecording() error {
-	_, err := client.Recording.PauseRecording()
+	_, err := client.Record.PauseRecord()
 	return err
 }
 
 func resumeRecording() error {
-	_, err := client.Recording.ResumeRecording()
+	_, err := client.Record.ResumeRecord()
 	return err
 }
 
 func pauseResumeRecording() error {
-	r, err := client.Recording.GetRecordingStatus()
-	if err != nil {
-		return err
-	}
-	if !r.IsRecording {
-		return fmt.Errorf("recording is not running")
-	}
-
-	if r.IsRecordingPaused {
-		return resumeRecording()
-	}
-	return pauseRecording()
+	_, err := client.Record.ToggleRecordPause()
+	return err
 }
 
 func recordingStatus() error {
-	r, err := client.Recording.GetRecordingStatus()
+	r, err := client.Record.GetRecordStatus()
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Recording: %s\n", strconv.FormatBool(r.IsRecording))
-	if !r.IsRecording {
+	fmt.Printf("Recording: %s\n", strconv.FormatBool(r.OutputActive))
+	if !r.OutputActive {
 		return nil
 	}
 
-	fmt.Printf("Paused: %s\n", strconv.FormatBool(r.IsRecordingPaused))
-	fmt.Printf("File: %s\n", r.RecordingFilename)
-	fmt.Printf("Timecode: %s\n", r.RecordTimecode)
+	fmt.Printf("Paused: %s\n", strconv.FormatBool(r.OuputPaused))
+	// TODO: see if recording filename is available from another API method
+	// fmt.Printf("File: %s\n", r.RecordingFilename)
+	fmt.Printf("Timecode: %s\n", r.OutputTimecode)
 
-	st, err := os.Stat(r.RecordingFilename)
-	if err != nil {
-		return err
-	}
-	fmt.Printf("Filesize: %s\n", humanize.Bytes(uint64(st.Size())))
+	// st, err := os.Stat(r.RecordingFilename)
+	// if err != nil {
+	// 	return err
+	// }
+	// fmt.Printf("Filesize: %s\n", humanize.Bytes(uint64(st.Size())))
 
 	return nil
 }

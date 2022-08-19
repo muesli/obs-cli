@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/andreykaipov/goobs/api/requests/streaming"
+	"github.com/andreykaipov/goobs/api/requests/stream"
 	"github.com/muesli/coral"
 )
 
@@ -50,39 +50,39 @@ var (
 )
 
 func startStopStream() error {
-	_, err := client.Streaming.StartStopStreaming(&streaming.StartStopStreamingParams{})
+	_, err := client.Stream.ToggleStream(&stream.ToggleStreamParams{})
 	return err
 }
 
 func startStream() error {
-	_, err := client.Streaming.StartStreaming(&streaming.StartStreamingParams{})
+	_, err := client.Stream.StartStream(&stream.StartStreamParams{})
 	return err
 }
 
 func stopStream() error {
-	_, err := client.Streaming.StopStreaming()
+	_, err := client.Stream.StopStream()
 	return err
 }
 
 func streamStatus() error {
-	r, err := client.Streaming.GetStreamingStatus()
+	r, err := client.Stream.GetStreamStatus()
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Streaming: %s\n", strconv.FormatBool(r.Streaming))
-	if !r.Streaming {
+	fmt.Printf("Streaming: %s\n", strconv.FormatBool(r.OutputActive))
+	if !r.OutputActive {
 		return nil
 	}
 
-	fmt.Printf("Timecode: %s\n", r.StreamTimecode)
+	fmt.Printf("Timecode: %s\n", r.OutputTimecode)
 
-	rs, err := client.Streaming.GetStreamSettings()
+	rs, err := client.Config.GetStreamServiceSettings()
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("URL: %s\n", rs.Settings.Server)
+	fmt.Printf("URL: %s\n", rs.StreamServiceSettings.Server)
 	return nil
 }
 

@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/andreykaipov/goobs/api/requests/scenes"
-	studiomode "github.com/andreykaipov/goobs/api/requests/studio_mode"
 	"github.com/muesli/coral"
 )
 
@@ -75,34 +74,34 @@ func listScenes() error {
 	}
 
 	for _, v := range r.Scenes {
-		fmt.Println(v.Name)
+		fmt.Println(v.SceneName)
 	}
 	return nil
 }
 
 func getScene() error {
-	r, err := client.Scenes.GetCurrentScene()
+	r, err := client.Scenes.GetCurrentProgramScene()
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(r.Name)
+	fmt.Println(r.CurrentProgramSceneName)
 	return nil
 }
 
 func setCurrentScene(scene string) error {
-	r := scenes.SetCurrentSceneParams{
+	r := scenes.SetCurrentProgramSceneParams{
 		SceneName: scene,
 	}
-	_, err := client.Scenes.SetCurrentScene(&r)
+	_, err := client.Scenes.SetCurrentProgramScene(&r)
 	return err
 }
 
 func setPreviewScene(scene string) error {
-	r := studiomode.SetPreviewSceneParams{
+	r := scenes.SetCurrentPreviewSceneParams{
 		SceneName: scene,
 	}
-	_, err := client.StudioMode.SetPreviewScene(&r)
+	_, err := client.Scenes.SetCurrentPreviewScene(&r)
 	return err
 }
 

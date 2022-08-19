@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	studiomode "github.com/andreykaipov/goobs/api/requests/studio_mode"
+	"github.com/andreykaipov/goobs/api/requests/transitions"
+	"github.com/andreykaipov/goobs/api/requests/ui"
 	"github.com/muesli/coral"
 )
 
@@ -57,20 +58,23 @@ var (
 	}
 )
 
-func disableStudioMode() error {
-	_, err := client.StudioMode.DisableStudioMode()
+func setStudioModeEnabled(enabled bool) error {
+	_, err := client.Ui.SetStudioModeEnabled(&ui.SetStudioModeEnabledParams{StudioModeEnabled: &enabled})
 	return err
 }
 
+func disableStudioMode() error {
+	return setStudioModeEnabled(false)
+}
+
 func enableStudioMode() error {
-	_, err := client.StudioMode.EnableStudioMode()
-	return err
+	return setStudioModeEnabled(true)
 }
 
 // Determine if the studio mode is currently enabled in OBS.
 func IsStudioModeEnabled() (bool, error) {
-	r, err := client.StudioMode.GetStudioModeStatus()
-	return r.StudioMode, err
+	r, err := client.Ui.GetStudioModeEnabled()
+	return r.StudioModeEnabled, err
 }
 
 func studioModeStatus() error {
@@ -84,12 +88,16 @@ func studioModeStatus() error {
 }
 
 func toggleStudioMode() error {
-	_, err := client.StudioMode.ToggleStudioMode()
+	enabled, err := IsStudioModeEnabled()
+	if err != nil {
+		return err
+	}
+	err = setStudioModeEnabled(!enabled)
 	return err
 }
 
 func transitionToProgram() error {
-	_, err := client.StudioMode.TransitionToProgram(&studiomode.TransitionToProgramParams{})
+	_, err := client.Transitions.TriggerStudioModeTransition(&transitions.TriggerStudioModeTransitionParams{})
 	return err
 }
 
