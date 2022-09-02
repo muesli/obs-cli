@@ -2,8 +2,9 @@ package main
 
 import (
 	"errors"
+	"fmt"
 
-	"github.com/andreykaipov/goobs/api/requests/sources"
+	// "github.com/andreykaipov/goobs/api/requests/sources"
 	"github.com/muesli/coral"
 )
 
@@ -28,32 +29,33 @@ var (
 )
 
 func changeLabel(source string, text string) error {
-	p := sources.GetTextFreetype2PropertiesParams{
-		Source: source,
-	}
+	// p := sources.GetTextFreetype2PropertiesParams{
+	// 	Source: source,
+	// }
 
-	resp, err := client.Sources.GetTextFreetype2Properties(&p)
-	if err != nil {
-		return err
-	}
+	// resp, err := client.Sources.GetTextFreetype2Properties(&p)
+	// if err != nil {
+	// 	return err
+	// }
 
-	r := sources.SetTextFreetype2PropertiesParams{
-		Source:      source,
-		Color1:      resp.Color1,
-		Color2:      resp.Color2,
-		CustomWidth: resp.CustomWidth,
-		DropShadow:  &resp.DropShadow,
-		Font:        resp.Font,
-		FromFile:    &resp.FromFile,
-		LogMode:     &resp.LogMode,
-		Outline:     &resp.Outline,
-		Text:        text,
-		TextFile:    resp.TextFile,
-		WordWrap:    &resp.WordWrap,
-	}
+	// r := sources.SetTextFreetype2PropertiesParams{
+	// 	Source:      source,
+	// 	Color1:      resp.Color1,
+	// 	Color2:      resp.Color2,
+	// 	CustomWidth: resp.CustomWidth,
+	// 	DropShadow:  &resp.DropShadow,
+	// 	Font:        resp.Font,
+	// 	FromFile:    &resp.FromFile,
+	// 	LogMode:     &resp.LogMode,
+	// 	Outline:     &resp.Outline,
+	// 	Text:        text,
+	// 	TextFile:    resp.TextFile,
+	// 	WordWrap:    &resp.WordWrap,
+	// }
 
-	_, err = client.Sources.SetTextFreetype2Properties(&r)
-	return err
+	// _, err = client.Sources.SetTextFreetype2Properties(&r)
+	// return err
+	return fmt.Errorf("TODO: refactor for v5 protocol changes")
 }
 
 func init() {

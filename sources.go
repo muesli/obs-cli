@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/andreykaipov/goobs/api/requests/sources"
+	"github.com/andreykaipov/goobs/api/requests/inputs"
 	"github.com/muesli/coral"
 )
 
@@ -54,7 +54,7 @@ func listSources() error {
 	*/
 
 	{
-		resp, err := client.Sources.GetSpecialSources()
+		resp, err := client.Inputs.GetSpecialInputs()
 		if err != nil {
 			return err
 		}
@@ -72,11 +72,11 @@ func listSources() error {
 }
 
 func toggleMute(source string) error {
-	p := sources.ToggleMuteParams{
-		Source: source,
+	p := inputs.ToggleInputMuteParams{
+		InputName: source,
 	}
 
-	_, err := client.Sources.ToggleMute(&p)
+	_, err := client.Inputs.ToggleInputMute(&p)
 	return err
 }
 

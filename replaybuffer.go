@@ -49,27 +49,27 @@ var (
 )
 
 func startReplayBuffer() error {
-	_, err := client.ReplayBuffer.StartReplayBuffer()
+	_, err := client.Outputs.StartReplayBuffer()
 	return err
 }
 
 func stopReplayBuffer() error {
-	_, err := client.ReplayBuffer.StopReplayBuffer()
+	_, err := client.Outputs.StopReplayBuffer()
 	return err
 }
 
 func saveReplayBuffer() error {
-	_, err := client.ReplayBuffer.SaveReplayBuffer()
+	_, err := client.Outputs.SaveReplayBuffer()
 	return err
 }
 
 func replayBufferStatus() error {
-	r, err := client.ReplayBuffer.GetReplayBufferStatus()
+	r, err := client.Outputs.GetReplayBufferStatus()
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Replay Buffer active: %s\n", strconv.FormatBool(r.IsReplayBufferActive))
+	fmt.Printf("Replay Buffer active: %s\n", strconv.FormatBool(r.OutputActive))
 	return nil
 }
 
