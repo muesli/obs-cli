@@ -11,10 +11,11 @@ import (
 
 var (
 	sceneCollectionCmd = &coral.Command{
-		Use:   "scenecollection",
-		Short: "manage scene collections",
-		Long:  `The scenecollection command manages scene collections`,
-		RunE:  nil,
+		Use:              "scenecollection",
+		Short:            "manage scene collections",
+		Long:             `The scenecollection command manages scene collections`,
+		RunE:             nil,
+		PersistentPreRun: connectOBSCommand,
 	}
 
 	listSceneCollectionCmd = &coral.Command{

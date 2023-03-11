@@ -12,10 +12,11 @@ import (
 
 var (
 	sceneCmd = &coral.Command{
-		Use:   "scene",
-		Short: "manage scenes",
-		Long:  `The scene command manages scenes`,
-		RunE:  nil,
+		Use:              "scene",
+		Short:            "manage scenes",
+		Long:             `The scene command manages scenes`,
+		RunE:             nil,
+		PersistentPreRun: connectOBSCommand,
 	}
 
 	currentSceneCmd = &coral.Command{

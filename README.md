@@ -265,3 +265,11 @@ Display virtual camera status:
 ```
 obs-cli virtualcam status
 ```
+
+## Development
+
+You can regenerate the man page with:
+
+```
+go run -tags mango . man
+```

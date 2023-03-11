@@ -10,10 +10,11 @@ import (
 
 var (
 	sourceCmd = &coral.Command{
-		Use:   "source",
-		Short: "manage sources",
-		Long:  `The source command manages sources`,
-		RunE:  nil,
+		Use:              "source",
+		Short:            "manage sources",
+		Long:             `The source command manages sources`,
+		RunE:             nil,
+		PersistentPreRun: connectOBSCommand,
 	}
 
 	listSourcesCmd = &coral.Command{
